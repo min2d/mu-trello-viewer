@@ -1,0 +1,10 @@
+$primary: rgb(66, 150, 228); // variables系はbulmaより前
+$desktop: 0; // レスポンシブを無効にする
+$tablet: 0; // レスポンシブを無効にする
+
+@import "~bulma"; //デフォルトのbulmaはこっち
+@import "~buefy/src/scss/buefy"; //buefy特有の配置などが変わるものはこっち
+
+html{
+  overflow-y: auto;
+}
