@@ -1,22 +1,21 @@
 <template>
   <div>
-    <nav
-      class="navbar header has-shadow is-primary"
-      role="navigation"
-      aria-label="main navigation"
-    >
-      <div class="navbar-brand">
-        <a
-          class="navbar-item"
-          href="/"
-        >muTrelloViewer</a>
+    <AppNavigation />
+    <section class="section">
+      <div class="container">
+        <nuxt />
       </div>
-    </nav>
+    </section>
   </div>
 </template>
 
 <script>
+import AppNavigation from '~/components/AppNavigation.vue'
+
 export default {
+  components: {
+    AppNavigation
+  },
   data () {
     return {
       items: [
