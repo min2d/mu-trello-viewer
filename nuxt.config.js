@@ -55,6 +55,8 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
+    baseURL: 'https://api.trello.com/1',
+    browserBaseURL: 'https://api.trello.com/1'
   },
   /*
   ** Build configuration
