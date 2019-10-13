@@ -7,7 +7,8 @@ export const state = () => ({
   lastUsedApiKey: null,
   lastUsedToken: null,
   lastUsedName: null,
-  boards: []
+  boards: [],
+  selectedBoard: null
 })
 
 const _mutations = {
@@ -19,12 +20,20 @@ const setterKeys = [
   'lastUsedApiKey',
   'lastUsedToken',
   'lastUsedName',
-  'boards'
+  'boards',
+  'selectedBoard'
 ]
 // 単純なsetter
 setterKeys.forEach((item) => {
   _mutations[`set${item.charAt(0).toUpperCase() + item.slice(1)}`] = function (state, value) {
     state[item] = value
+  }
+  _mutations[`clear${item.charAt(0).toUpperCase() + item.slice(1)}`] = function (state) {
+    if (Array.isArray(state[item])) {
+      state[item] = []
+    } else {
+      state[item] = null
+    }
   }
 })
 
@@ -47,13 +56,20 @@ export const actions = {
           }
         }
       )
-      // ボード、リスト、すべての情報をクリア(TODO)
+      // ボードリストが前提となるものはすべてクリア(TODO)
+      commit('clearBoards')
+      commit('clearSelectedBoard')
       commit('setBoards', items)
       commit('setLastUsedApiKey', state.apiKey)
       commit('setLastUsedToken', state.token)
+      commit('setLastUsedName', state.name)
+      commit('lists/clearLists', null, { root: true })
       Toast.open('boards ready!')
     } catch (error) {
       Toast.open('error: check the input values are right')
     }
+  },
+  setSelectedBoard ({ commit }, value) {
+    commit('setSelectedBoard', value)
   }
 }

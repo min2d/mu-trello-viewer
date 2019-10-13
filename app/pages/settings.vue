@@ -26,14 +26,21 @@
       </button>
     </div>
     <div class="card-content">
+      <div>
+        <p>viewer based on: <code>{{ selectedBoard ? selectedBoard.name : 'nothing!' }}</code></p>
+        <p>to change another one, click "use this board"</p>
+      </div>
       <b-table :data="boards">
         <template slot-scope="props">
           <b-table-column label="Name">
             {{ props.row.name }}
           </b-table-column>
+          <b-table-column label="ID">
+            {{ props.row.id }}
+          </b-table-column>
           <b-table-column>
-            <button class="button is-primary">
-              select this board
+            <button class="button is-primary" @click="setSelectedBoard(props.row)">
+              use this board
             </button>
           </b-table-column>
         </template>
@@ -56,7 +63,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('settings', ['lastUsedApiKey', 'lastUsedToken', 'boards']),
+    ...mapState('settings', ['lastUsedApiKey', 'lastUsedToken', 'boards', 'selectedBoard']),
     apiKey: {
       get () {
         return this.$store.state.settings.apiKey
@@ -83,7 +90,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('settings', ['fetchBoards'])
+    ...mapActions('settings', ['fetchBoards', 'setSelectedBoard'])
   }
 }
 </script>
