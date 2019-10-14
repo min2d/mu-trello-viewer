@@ -1,6 +1,9 @@
 <template>
   <div class="card">
     <div class="card-content">
+      <div>
+        <b-icon icon="alert" />Name is the name fetched when board set.
+      </div>
       <button class="button is-warning" @click="clearMembers">
         clear all
       </button>

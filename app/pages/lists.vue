@@ -1,13 +1,16 @@
 <template>
   <b-tabs>
     <b-tab-item v-for="list in lists" :key="list.id" :label="list.name">
-      <b-table :data="list.cards">
+      <b-table :data="list.cards" bordered="true">
         <template slot-scope="props">
-          <b-table-column label="Name">
+          <b-table-column label="Name" width="500">
             {{ props.row.name }}
           </b-table-column>
-          <b-table-column label="description">
+          <b-table-column label="description" class="description">
             {{ props.row.desc }}
+          </b-table-column>
+          <b-table-column label="members" width="150">
+            <span v-for="idMember in props.row.idMembers" :key="idMember">{{ members[idMember].displayName }}</span>
           </b-table-column>
         </template>
         <template slot="empty">
@@ -33,8 +36,8 @@ export default {
   components: {
   },
   computed: {
-    ...mapState('lists', ['lists'])
-
+    ...mapState('lists', ['lists']),
+    ...mapState('members', ['members'])
   },
   created () {
     this.fetchLists()
@@ -54,5 +57,9 @@ export default {
 }
 .b-tabs /deep/ td{
   font-size:.9em;
+  &.description{
+    font-size:75%;
+  }
 }
+
 </style>
