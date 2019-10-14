@@ -1,6 +1,9 @@
 <template>
   <b-tabs>
     <b-tab-item v-for="list in lists" :key="list.id" :label="list.name">
+      <template slot="header">
+        <span> {{ list.name }} <b-tag rounded> {{ list.cards.length }} </b-tag> </span>
+      </template>
       <b-table :data="list.cards" bordered="true">
         <template slot-scope="props">
           <b-table-column label="Name" width="500">
@@ -25,6 +28,8 @@
         </template>
       </b-table>
     </b-tab-item>
+  </b-tabs>
+</template></b-tab-item>
   </b-tabs>
 </template>
 
