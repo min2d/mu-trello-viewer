@@ -2,15 +2,18 @@
   <b-navbar type="is-primary">
     <template slot="brand">
       <b-navbar-item tag="router-link" :to="{ path: '/' }">
-        muTrelloViewer
+        <img src="~/assets/brand.png">
       </b-navbar-item>
     </template>
     <template slot="start">
+      <b-navbar-item href="/lists">
+        lists
+      </b-navbar-item>
       <b-navbar-item href="/settings">
         settings
       </b-navbar-item>
-      <b-navbar-item href="/lists">
-        lists
+      <b-navbar-item href="/members">
+        members
       </b-navbar-item>
     </template>
   </b-navbar>

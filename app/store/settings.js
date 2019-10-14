@@ -56,7 +56,7 @@ export const actions = {
           }
         }
       )
-      // ボードリストが前提となるものはすべてクリア(TODO)
+      // メンバー情報は自分でボタンを押す以外でクリアしない
       commit('clearBoards')
       commit('clearSelectedBoard')
       commit('setBoards', items)
@@ -64,12 +64,14 @@ export const actions = {
       commit('setLastUsedToken', state.token)
       commit('setLastUsedName', state.name)
       commit('lists/clearLists', null, { root: true })
+
       Toast.open('boards ready!')
     } catch (error) {
       Toast.open('error: check the input values are right')
     }
   },
-  setSelectedBoard ({ commit }, value) {
+  setSelectedBoard ({ commit, dispatch }, value) {
     commit('setSelectedBoard', value)
+    dispatch('members/fetchMembers', null, { root: true })
   }
 }

@@ -6,7 +6,7 @@
           <b-table-column label="Name">
             {{ props.row.name }}
           </b-table-column>
-          <b-table-column label="ID">
+          <b-table-column label="description">
             {{ props.row.desc }}
           </b-table-column>
         </template>

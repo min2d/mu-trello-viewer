@@ -1,11 +1,42 @@
 import { ToastProgrammatic as Toast } from 'buefy'
 export const state = () => ({
-  lists: []
+  members: {}
 })
+
+export const getters = {
+  members (state) {
+    return Object.keys(state.members).map((key) => {
+      return {
+        ...state.members[key],
+        id: key
+      }
+    })
+  }
+}
+
+class Member {
+  constructor (name, color) {
+    this.name = name
+    this.color = color || 'gray'
+    this.displayName = null
+  }
+}
 const _mutations = {
+  setMembers (state, value) {
+    value.forEach((item) => {
+      if (!state.members[item.id]) {
+        state.members[item.id] = new Member(item.fullName)
+      }
+    })
+  },
+  clearMembers (state) {
+    state.members = {}
+  },
+  setMemberDisplayName (state, { id, dName }) {
+    state.members[id].displayName = dName
+  }
 }
 const setterKeys = [
-  'lists'
 ]
 // 単純なsetter
 setterKeys.forEach((item) => {
@@ -20,32 +51,27 @@ setterKeys.forEach((item) => {
     }
   }
 })
-
 export const mutations = _mutations
 
 export const actions = {
-  async fetchLists ({ commit, state, rootState }) {
+  async fetchMembers ({ commit, state, rootState }) {
     if (!rootState.settings.selectedBoard) {
       Toast.open('error: set base board at setting')
       return
     }
     try {
       const items = await this.$axios.$get(
-        `/boards/${rootState.settings.selectedBoard.id}/lists`, {
+        `/boards/${rootState.settings.selectedBoard.id}/members`, {
           params: {
-            cards: 'open',
-            card_fields: 'all',
-            filter: 'open',
-            fields: 'all',
             key: rootState.settings.lastUsedApiKey,
             token: rootState.settings.lastUsedToken
           }
         }
       )
 
-      commit('setLists', items)
+      commit('setMembers', items)
 
-      Toast.open('Cards ready!')
+      Toast.open('Members ready! Check the "members" page!')
     } catch (error) {
       Toast.open('error: something went wrong')
     }
