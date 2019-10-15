@@ -24,12 +24,15 @@ setterKeys.forEach((item) => {
 export const mutations = _mutations
 
 export const actions = {
-  async fetchLists ({ commit, state, rootState }) {
+  async fetchLists ({ commit, state, rootState, dispatch }) {
     if (!rootState.settings.selectedBoard) {
       Toast.open('error: set base board at setting')
       return
     }
     try {
+      commit('labels/clearLabels', null, { root: true })
+      await dispatch('labels/fetchLabels', null, { root: true })
+
       const items = await this.$axios.$get(
         `/boards/${rootState.settings.selectedBoard.id}/lists`, {
           params: {

@@ -73,5 +73,7 @@ export const actions = {
   setSelectedBoard ({ commit, dispatch }, value) {
     commit('setSelectedBoard', value)
     dispatch('members/fetchMembers', null, { root: true })
+    commit('labels/clearLabels', null, { root: true })
+    dispatch('labels/fetchLabels', null, { root: true })
   }
 }

@@ -4,8 +4,11 @@
       <template slot="header">
         <span> {{ list.name }} <b-tag rounded> {{ list.cards.length }} </b-tag> </span>
       </template>
-      <b-table :data="list.cards" bordered="true">
+      <b-table :data="list.cards" :bordered="true">
         <template slot-scope="props">
+          <b-table-column label="Name" width="150">
+            <span v-for="idLabel in props.row.idLabels" :key="idLabel">{{ labels[idLabel].name }}</span>
+          </b-table-column>
           <b-table-column label="Name" width="500">
             {{ props.row.name }}
           </b-table-column>
@@ -29,8 +32,6 @@
       </b-table>
     </b-tab-item>
   </b-tabs>
-</template></b-tab-item>
-  </b-tabs>
 </template>
 
 <script>
@@ -42,7 +43,8 @@ export default {
   },
   computed: {
     ...mapState('lists', ['lists']),
-    ...mapState('members', ['members'])
+    ...mapState('members', ['members']),
+    ...mapState('labels', ['labels'])
   },
   created () {
     this.fetchLists()
