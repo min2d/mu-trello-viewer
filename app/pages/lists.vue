@@ -7,7 +7,7 @@
       <b-table :data="list.cards" :bordered="true">
         <template slot-scope="props">
           <b-table-column label="Name" width="150">
-            <span v-for="idLabel in props.row.idLabels" :key="idLabel">{{ labels[idLabel].name }}</span>
+            <span v-for="label in props.row.labels" :key="label.id" :style="labelColorStyle[label.color]" class="alt-label">{{ label.name }}</span>
           </b-table-column>
           <b-table-column label="Name" width="500">
             {{ props.row.name }}
@@ -35,16 +35,29 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState, mapGetters } from 'vuex'
 
 export default {
   layout: 'wide',
   components: {
   },
   computed: {
-    ...mapState('lists', ['lists']),
+    ...mapGetters('lists', ['lists']),
     ...mapState('members', ['members']),
-    ...mapState('labels', ['labels'])
+    ...mapState('labels', ['labels']),
+    labelColorStyle () {
+      return {
+        green: { backgroundColor: 'green', color: 'white' },
+        blue: { backgroundColor: '#0079c2', color: 'white' },
+        red: { backgroundColor: '#a73836', color: 'white' },
+        yellow: { backgroundColor: '#ffdb4f' },
+        black: { backgroundColor: 'navy', color: 'white' },
+        orange: { backgroundColor: 'orange', color: 'white' },
+        sky: { backgroundColor: '#33CCFF', color: 'white' },
+        purple: { backgroundColor: '#8f76d6', color: 'white' },
+        gray: {}
+      }
+    }
   },
   created () {
     this.fetchLists()
@@ -67,6 +80,11 @@ export default {
   &.description{
     font-size:75%;
   }
+}
+.alt-label{
+  font-weight: bold;
+  padding: 0 .3em;
+  border-radius: .2em;
 }
 
 </style>

@@ -4,7 +4,7 @@ export const state = () => ({
 })
 
 export const getters = {
-  members (state) {
+  membersArr (state) {
     return Object.keys(state.members).map((key) => {
       return {
         ...state.members[key],

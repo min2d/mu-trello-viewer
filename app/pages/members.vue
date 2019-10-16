@@ -7,7 +7,7 @@
       <button class="button is-warning" @click="clearMembers">
         clear all
       </button>
-      <b-table :data="members">
+      <b-table :data="membersArr">
         <template slot-scope="props">
           <b-table-column label="ID">
             {{ props.row.id }}
@@ -27,7 +27,7 @@
 import { mapGetters, mapMutations } from 'vuex'
 export default {
   computed: {
-    ...mapGetters('members', ['members'])
+    ...mapGetters('members', ['membersArr'])
   },
   methods: {
     ...mapMutations('members', ['setMemberDisplayName', 'clearMembers'])

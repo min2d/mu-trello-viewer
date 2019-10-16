@@ -2,6 +2,33 @@ import { ToastProgrammatic as Toast } from 'buefy'
 export const state = () => ({
   lists: []
 })
+
+export const getters = {
+  lists (state, getters, rootState) {
+    const lists = JSON.parse(JSON.stringify(state.lists))
+    lists.forEach((list) => {
+      list.cards.forEach((card) => {
+        card.labels = []
+        card.idLabels.forEach((idLabel) => {
+          if (rootState.labels.labels[idLabel]) {
+            card.labels.push({
+              id: idLabel,
+              ...rootState.labels.labels[idLabel]
+            })
+          } else {
+            card.labels.push({
+              id: idLabel,
+              name: '***',
+              color: 'gray'
+            })
+          }
+        })
+      })
+    })
+    return lists
+  }
+}
+
 const _mutations = {
 }
 const setterKeys = [
