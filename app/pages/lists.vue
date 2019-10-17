@@ -6,17 +6,30 @@
       </template>
       <b-table :data="list.cards" :bordered="true">
         <template slot-scope="props">
-          <b-table-column label="Name" width="150">
+          <b-table-column label="members" width="150">
+            <span v-for="member in props.row.members" :key="member.id" style="padding-right:.3em;">{{ member.displayName }}</span>
+          </b-table-column>
+          <b-table-column label="Label">
             <span v-for="label in props.row.labels" :key="label.id" :style="labelColorStyle[label.color]" class="alt-label">{{ label.name }}</span>
           </b-table-column>
-          <b-table-column label="Name" width="500">
+          <b-table-column label="Name">
             {{ props.row.name }}
           </b-table-column>
           <b-table-column label="description" class="description">
-            {{ props.row.desc }}
-          </b-table-column>
-          <b-table-column label="members" width="150">
-            <span v-for="idMember in props.row.idMembers" :key="idMember">{{ members[idMember].displayName }}</span>
+            <b-collapse :open="false" :aria-id="'clps' + props.row.id">
+              <a
+                v-if="props.row.desc"
+                slot="trigger"
+                :aria-controls="'clps' + props.row.id"
+              >
+                {{ props.row.desc.substring(0,50) }}
+              </a>
+              <div class="notification">
+                <div class="content">
+                  {{ props.row.desc }}
+                </div>
+              </div>
+            </b-collapse>
           </b-table-column>
         </template>
         <template slot="empty">

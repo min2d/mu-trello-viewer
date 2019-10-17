@@ -20,3 +20,14 @@ $ yarn generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
+
+# 仕様
+## List
+Apiキー、トークン、ユーザ名、ボード指定済みでlistsページをロードしたときに取得
+
+## Member
+ボード指定時に追加取得、displayNameを上書き可能、削除は全削除をMembersページで押す
+
+## Label
+ボード指定時、Listロード時にクリアしてから取得

@@ -18,7 +18,7 @@ class Member {
   constructor (name, color) {
     this.name = name
     this.color = color || 'gray'
-    this.displayName = null
+    this.displayName = name // 入力用の枠
   }
 }
 const _mutations = {

@@ -23,6 +23,21 @@ export const getters = {
             })
           }
         })
+        card.members = []
+        card.idMembers.forEach((idMember) => {
+          if (rootState.members.members[idMember]) {
+            card.members.push({
+              id: idMember,
+              ...rootState.members.members[idMember]
+            })
+          } else {
+            card.members.push({
+              id: idMember,
+              name: '***',
+              displayName: '***'
+            })
+          }
+        })
       })
     })
     return lists
