@@ -10,7 +10,7 @@
             <span v-for="member in props.row.members" :key="member.id" style="padding-right:.3em;">{{ member.displayName }}</span>
           </b-table-column>
           <b-table-column label="Label">
-            <span v-for="label in props.row.labels" :key="label.id" :style="labelColorStyle[label.color]" class="alt-label">{{ label.name }}</span>
+            <span v-for="label in props.row.labels" :key="label.id" :style="labelColorStyles[label.color]" class="alt-label">{{ label.name }}</span>
           </b-table-column>
           <b-table-column label="Name">
             {{ props.row.name }}
@@ -58,19 +58,7 @@ export default {
     ...mapGetters('lists', ['lists']),
     ...mapState('members', ['members']),
     ...mapState('labels', ['labels']),
-    labelColorStyle () {
-      return {
-        green: { backgroundColor: 'green', color: 'white' },
-        blue: { backgroundColor: '#0079c2', color: 'white' },
-        red: { backgroundColor: '#a73836', color: 'white' },
-        yellow: { backgroundColor: '#ffdb4f' },
-        black: { backgroundColor: 'navy', color: 'white' },
-        orange: { backgroundColor: 'orange', color: 'white' },
-        sky: { backgroundColor: '#33CCFF', color: 'white' },
-        purple: { backgroundColor: '#8f76d6', color: 'white' },
-        gray: {}
-      }
-    }
+    ...mapState('settings', ['labelColorStyles'])
   },
   created () {
     this.fetchLists()

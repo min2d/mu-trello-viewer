@@ -1,5 +1,5 @@
 <template>
-  <b-navbar type="is-primary">
+  <b-navbar type="is-primary" fixed-top="true">
     <template slot="brand">
       <b-navbar-item tag="router-link" :to="{ path: '/' }">
         <img src="~/assets/brand.png">
@@ -8,6 +8,9 @@
     <template slot="start">
       <b-navbar-item href="/lists">
         lists
+      </b-navbar-item>
+      <b-navbar-item href="/lists_by_members">
+        members-lists
       </b-navbar-item>
       <b-navbar-item href="/settings">
         settings

@@ -8,7 +8,18 @@ export const state = () => ({
   lastUsedToken: null,
   lastUsedName: null,
   boards: [],
-  selectedBoard: null
+  selectedBoard: null,
+  labelColorStyles: {
+    green: { backgroundColor: 'green', color: 'white' },
+    blue: { backgroundColor: '#0079c2', color: 'white' },
+    red: { backgroundColor: '#a73836', color: 'white' },
+    yellow: { backgroundColor: '#ffdb4f' },
+    black: { backgroundColor: '#4b4b6b', color: 'white' },
+    orange: { backgroundColor: 'orange', color: 'white' },
+    sky: { backgroundColor: '#33CCFF', color: 'white' },
+    purple: { backgroundColor: '#8f76d6', color: 'white' },
+    gray: {}
+  }
 })
 
 const _mutations = {

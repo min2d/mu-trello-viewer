@@ -41,6 +41,32 @@ export const getters = {
       })
     })
     return lists
+  },
+  listsByMembers (state, getters, rootState) {
+    const members = []
+    getters.lists.forEach((list) => {
+      list.cards.forEach((card) => {
+        card.members.forEach((member) => {
+          let foundMember = members.find((item) => { return item.id === member.id })
+          if (!foundMember) {
+            foundMember = { ...member, lists: [] }
+            members.push(foundMember)
+          }
+          let foundList = foundMember.lists.find((item) => { return item.id === list.id })
+          if (!foundList) {
+            foundList = { id: list.id, name: list.name, cards: [] }
+            foundMember.lists.push(foundList)
+          }
+          foundList.cards.push(card)
+        })
+      })
+    })
+    members.forEach((listsByMember) => {
+      listsByMember.lists.sort((before, after) => {
+        return before.pos - after.pos
+      })
+    })
+    return members
   }
 }
 
