@@ -1,5 +1,11 @@
+const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
+  router: {
+    base: '/mu-trello-viewer/'
+  }
+} : {}
 
 export default {
+  ...routerBase,
   mode: 'spa',
   srcDir: 'app',
 
