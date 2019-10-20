@@ -6,16 +6,16 @@
       </b-navbar-item>
     </template>
     <template slot="start">
-      <b-navbar-item href="/lists">
+      <b-navbar-item tag="router-link" :to="{ path: '/lists' }">
         lists
       </b-navbar-item>
-      <b-navbar-item href="/lists_by_members">
+      <b-navbar-item tag="router-link" :to="{ path: '/lists_by_members' }">
         members-lists
       </b-navbar-item>
-      <b-navbar-item href="/settings">
+      <b-navbar-item tag="router-link" :to="{ path: '/settings' }">
         settings
       </b-navbar-item>
-      <b-navbar-item href="/members">
+      <b-navbar-item tag="router-link" :to="{ path: '/members' }">
         members
       </b-navbar-item>
     </template>

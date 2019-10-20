@@ -23,6 +23,7 @@
 <script>
 import { mapGetters, mapState, mapActions } from 'vuex'
 export default {
+  layout: 'wide',
   computed: {
     ...mapGetters('lists', ['listsByMembers']),
     ...mapState('settings', ['labelColorStyles'])
