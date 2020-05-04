@@ -114,6 +114,7 @@ export const actions = {
         }
       )
 
+      console.log(items)
       commit('setLists', items)
 
       Toast.open('Cards ready!')
